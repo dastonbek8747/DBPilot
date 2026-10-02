@@ -27,14 +27,14 @@ def chat_agent(request: str, database_url: str, session_id: str):
             db=get_database(database_url),
             llm=local_qwen2_5_coder_latest
         )
-
-        agent = create_agent(model=gemini3_5_flash, system_prompt=AGENT_PROMPT, tools=TOOLS + sql_toolkit,
+        sql_tools = sql_toolkit.get_tools()
+        agent = create_agent(model=gemini3_5_flash, system_prompt=AGENT_PROMPT, tools=TOOLS + sql_tools,
                              checkpointer=checkpoint)
 
         response = agent.invoke({"messages": [{"role": "user", "content": f"{request}"}]},
                                 config={"configurable": {"thread_id": session_id}})
 
-        return response
+        return response['messages'][-1].content[0]['text']
 
 
 def get_chat_history(session_id: str, ):
