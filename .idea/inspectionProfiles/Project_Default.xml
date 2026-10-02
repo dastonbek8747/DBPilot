@@ -1,0 +1,45 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="fastapi" />
+          <option value="sentence-transformers" />
+          <option value="psycopg2-binary" />
+          <option value="langchain-google-genai" />
+          <option value="langchain" />
+          <option value="langchain-core" />
+          <option value="langgraph" />
+          <option value="pydantic" />
+          <option value="python-dotenv" />
+          <option value="langchain-openrouter" />
+          <option value="langchain-community" />
+          <option value="opencv-python" />
+          <option value="ultralytics" />
+          <option value="face_recognition" />
+          <option value="cvzone" />
+          <option value="sqlalchemy" />
+          <option value="aiogram" />
+          <option value="langchain-groq" />
+          <option value="langchain-nvidia-ai-endpoints" />
+          <option value="streamlit" />
+          <option value="langchain-postgres" />
+          <option value="langchain-mysql" />
+          <option value="langchain-sql-test" />
+          <option value="langchain-sqlserver" />
+          <option value="langchain-google-cloud-sql-mssql" />
+          <option value="langchain-google-cloud-sql-mysql" />
+          <option value="pydf" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyStubPackagesAdvertiser" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="djangorestframework" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
