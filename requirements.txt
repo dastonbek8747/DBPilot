@@ -22,3 +22,6 @@ argon2-cffi
 python-dotenv
 uvicorn
 langgraph-checkpoint-postgres
+requests
+pandas
+plotly

@@ -1,6 +1,7 @@
 from langchain_groq import ChatGroq
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_ollama import ChatOllama
+from langchain_openrouter import ChatOpenRouter
 import os
 from dotenv import load_dotenv
 
@@ -8,7 +9,7 @@ load_dotenv()
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 gpt_oss_120b = ChatGroq(
     api_key=GROQ_API_KEY,
     model="openai/gpt-oss-120b"
@@ -47,4 +48,14 @@ local_qwen2_5_coder_latest = ChatOllama(
 )
 local_qwen3_8b = ChatOllama(
     model="qwen3:8b"
+)
+
+openrouter_qwen_3_8 = ChatOpenRouter(
+    api_key=OPENROUTER_API_KEY,
+    model="qwen/qwen3.8-27b:free"
+)
+
+openrouter_apodex_1_1_mini = ChatOpenRouter(
+    api_key=OPENROUTER_API_KEY,
+    model="apodex/apodex-1.1-mini:free"
 )
