@@ -28,7 +28,7 @@ if st.session_state.register:
         st.title("Database Connection")
         database_type = st.selectbox("Database Type", ["PostgreSQL", "SQLite", "MySQL"])
         if database_type == "PostgreSQL":
-            driver_name = "postgresql+psycopg2"
+            driver_name = "postgresql"
         elif database_type == "SQLite":
             driver_name = "sqlite"
         elif database_type == "MySQL":

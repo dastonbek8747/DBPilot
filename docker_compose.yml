@@ -1,0 +1,16 @@
+services:
+  api:
+    build: .
+    command: py backend/main.py
+    env_file:
+      - backend/.env
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - ./creating_files
+  ui:
+    build: .
+    commands: streamlit run frontend/app.py
+    ports:
+      - "8501:8501"

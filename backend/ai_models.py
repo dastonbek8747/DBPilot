@@ -20,7 +20,7 @@ class AgentResponse(BaseModel):
     file_name: str = Field(description="Actual generated filename. Empty string if no file was created.")
 
 
-llm_with_output = openrouter_qwen_3_8.with_structured_output(AgentResponse)
+llm_with_output = gemini3_8_flash.with_structured_output(AgentResponse)
 
 
 def chat_agent(request: str, database_url: str, session_id: str):
