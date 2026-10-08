@@ -4,6 +4,7 @@ from dark_swag import FastAPI as DarkFastAPI
 from fastapi import Depends, Response
 from db_conn import get_db, Base, enginge, check_conn_db
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 import models, schemas
 from hashing_password import generate_session_id, verify_password, hashing_password
@@ -15,6 +16,11 @@ app.mount(
     "/creating_files",
     StaticFiles(directory="creating_files")
 )
+app.add_middleware(CORSMiddleware,
+                   allow_origins=["*"],
+                   allow_credentials=True,
+                   allow_methods=["*"],
+                   allow_headers=["*"])
 
 Base.metadata.create_all(enginge)
 

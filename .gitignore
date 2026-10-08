@@ -1,6 +1,6 @@
-.env
+backend/.env
 .idea
 .venv
 requirements.txt
-.env
+backend/.env
 .venv/

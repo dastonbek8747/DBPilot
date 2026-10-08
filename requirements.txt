@@ -18,7 +18,10 @@ argon2-cffi
 pyjwt
 aiogram
 dark-swag
+psycopg2
+psycopg2-binary
 argon2-cffi
+pydantic[email]
 python-dotenv
 uvicorn
 langgraph-checkpoint-postgres
