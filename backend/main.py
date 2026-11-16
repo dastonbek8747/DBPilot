@@ -1,28 +1,31 @@
 import os
-import uvicorn
-from dark_swag import FastAPI as DarkFastAPI
-from fastapi import Depends, Response
-from db_conn import get_db, Base, enginge, check_conn_db
-from fastapi.staticfiles import StaticFiles
-from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy.orm import Session
-import models, schemas
-from hashing_password import generate_session_id, verify_password, hashing_password
-from ai_models import chat_agent, get_chat_history
+
 import jwt
+import models
+import schemas
+import uvicorn
+from ai_models import chat_agent, get_chat_history
+from dark_swag import FastAPI as DarkFastAPI
+from db_conn import Base, _get_engine, check_conn_db, get_db
+from fastapi import Depends, Response
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from hashing_password import generate_session_id, hashing_password, verify_password
+from sqlalchemy.orm import Session
 
 app = DarkFastAPI()
 app.mount(
     "/creating_files",
     StaticFiles(directory="creating_files")
 )
+allowed_origins = os.getenv("CORS_ORIGINS", "http://localhost:8501").split(",")
 app.add_middleware(CORSMiddleware,
-                   allow_origins=["*"],
+                   allow_origins=allowed_origins,
                    allow_credentials=True,
-                   allow_methods=["*"],
+                   allow_methods=["GET", "POST"],
                    allow_headers=["*"])
 
-Base.metadata.create_all(enginge)
+Base.metadata.create_all(_get_engine())
 
 
 @app.post("/test")
@@ -81,7 +84,8 @@ async def login(request: schemas.LoginUser, response: Response, db: Session = De
         if verify_password(request.password, db_uer.password):
             encoded_jwt = jwt.encode(key=os.environ.get("SECRET_KEY"), payload={"user_id": db_uer.id},
                                      algorithm='HS256')
-            response.set_cookie(key="access_token", value=encoded_jwt, httponly=False, secure=False, samesite="strict")
+            response.set_cookie(key="access_token", value=encoded_jwt, httponly=True,
+                                secure=False, samesite="strict")
             return {"message": "Login successful", "user": db_uer}
         else:
             return {"message": "Invalid credentials"}

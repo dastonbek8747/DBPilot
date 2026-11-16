@@ -1,9 +1,12 @@
+import os
 import time
 import requests
 import streamlit as st
 from streamlit import session_state
 import pandas as pd
 import plotly.express as px
+
+API_BASE = os.getenv("API_URL", "http://localhost:8000").rstrip("/")
 
 if "db_url" not in st.session_state:
     st.session_state.db_url = ""
@@ -42,7 +45,7 @@ if st.session_state.register:
         connection = st.button("Connect")
         # st.subheader(f"DB NAME {db_name}, USER {db_user}, PASSWORD {db_password}, HOST {db_host}, PORT {db_port},Driver name")
         if connection:
-            response = requests.post(url="http://localhost:8000/check_db",
+            response = requests.post(url=f"{API_BASE}/check_db",
                                      json={"db_name": db_name, "db_user": db_user, "db_password": db_password,
                                            "db_host": db_host, "db_port": db_port, "driver_name": driver_name})
             # st.success(response.json())
@@ -65,7 +68,7 @@ if st.session_state.register:
                 st.markdown(user_request)
             st.divider()
             with st.chat_message("assistant"):
-                response = requests.post(url="http://localhost:8000/chat_agent",
+                response = requests.post(url=f"{API_BASE}/chat_agent",
                                          json={"session_id": st.session_state.session_id, "request": user_request,
                                                "database_url": st.session_state.db_url})
                 # st.info(response)
@@ -88,7 +91,7 @@ if st.session_state.register:
                 #     st.info(response.json()["sql"])
                 if response.json()['file_name'] != "":
                     st.link_button(label="Downloading file",
-                                   url=f"http://localhost:8000/creating_files/{response.json()['file_name']}")
+                                   url=f"{API_BASE}/creating_files/{response.json()['file_name']}")
 
             st.divider()
             # if response.chart_type == "bar":
@@ -109,7 +112,7 @@ else:
         password = st.text_input("Password", key="sing_up_password", type="password")
         submit_sing_in = st.button("Sign Up", icon="🔑")
         if submit_sing_in:
-            response = requests.post(url="http://localhost:8000/signin",
+            response = requests.post(url=f"{API_BASE}/signin",
                                      json={"username": username, "email": email, "password": password})
             st.success(response.json())
 
@@ -126,7 +129,7 @@ else:
         password_login = st.text_input("Password", key="login_password", type="password")
         submit = st.button("Login", icon="🔐")
         if submit:
-            response = requests.post(url="http://localhost:8000/login",
+            response = requests.post(url=f"{API_BASE}/login",
                                      json={"email": email_login, "password": password_login})
             st.success(response.json())
             time.sleep(3)

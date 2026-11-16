@@ -1,6 +1,23 @@
-backend/.env
-.idea
-.venv
-requirements.txt
-backend/.env
+# Environment
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
 .venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+
+# Local data / generated files
+*.db
+*.sqlite3
+creating_files/
+*.log
+.DS_Store
