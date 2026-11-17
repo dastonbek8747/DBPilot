@@ -8,8 +8,6 @@
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![CI](https://github.com/dastonbek8747/DBPilot/actions/workflows/ci.yml/badge.svg)
 
-<!-- Replace with a real demo GIF: docs/demo.gif -->
-![demo](docs/demo.gif)
 
 ## Features
 
